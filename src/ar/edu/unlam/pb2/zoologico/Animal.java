@@ -10,10 +10,19 @@ public abstract class Animal {
 	private String alimento;
 	private String sonido;
 	
-	public Animal (String nombre, Character sexo, Integer edad, String sonido) {
+	public Animal (Integer id,String nombre, Character sexo, Integer edad, String sonido) {
 		
 
 	}
+
+	public String getAlimento() {
+		return alimento;
+	}
+
+	public void setAlimento(String alimento) {
+		this.alimento = alimento;
+	}
+	
 	
 	
 }
