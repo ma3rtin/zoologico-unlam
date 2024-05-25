@@ -27,31 +27,40 @@ public class ZoologicoTest {
 
 	@Test
 	public void queSePuedaAsignarPersonalAUnZoologico() {
-		String nombre = "Juan";
-		String apellido = "Perez";
-		Integer edad = 34;
-		Integer dni = 1233413;
-		Integer telefono = 111222233;
-
-		Persona cuidador1 = new Cuidador(nombre, apellido, edad, dni, telefono);
-
-		Boolean agregado = zoologico.agregarCuidador(cuidador1);
-
-		assertTrue(agregado);
+		Persona cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10);
+		Boolean cuidadorAgregado = zoologico.agregarCuidador(cuidador);
+		assertTrue(cuidadorAgregado);
 	}
 	
 	@Test
 	public void queSePuedaAgregarUnAnimalAlZoologico() {
-		String nombre = "Leon";
-		Character sexo = 'M';
-		Integer edad = 19;
-		String sonido = "ruar";
-		String melena = "rubia";
-		Integer id = 1;
-		Animal leon = new Leon(id,nombre,sexo,edad,sonido,melena);
+		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
 		Boolean animalAgregado = this.zoologico.agregarAnimal(leon);
 		assertTrue(animalAgregado);
+	}
+	
+	@Test
+	public void queSePuedaAlimentarUnAnimal() {
+		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
+		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10);
+		
+		this.zoologico.agregarAnimal(leon);
+		this.zoologico.agregarCuidador(cuidador);
+		
+		Animal animalBuscado = this.zoologico.buscarAnimal(1);
+		
+		Boolean seAlimento = cuidador.alimentarAnimal(animalBuscado,"Carne");
+		assertTrue(seAlimento);
 		
 	}
+	
+	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String sonido, String melena) {
+        return new Leon(id,nombre,sexo,edad,sonido,melena);
+    }
+	
+	private Cuidador crearCuidador(String nombre, String apellido, Integer edad, Integer dni, Integer telefono, Integer antiguedad) {
+		return new Cuidador(nombre, apellido, edad, dni, telefono, antiguedad);
+	}
+	
 
 }

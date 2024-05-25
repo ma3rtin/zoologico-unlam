@@ -11,8 +11,7 @@ public abstract class Animal {
 	private String sonido;
 	
 	public Animal (Integer id,String nombre, Character sexo, Integer edad, String sonido) {
-		
-
+		this.id = id;
 	}
 
 	public String getAlimento() {
@@ -22,6 +21,16 @@ public abstract class Animal {
 	public void setAlimento(String alimento) {
 		this.alimento = alimento;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	protected abstract Boolean alimentar(String alimento);
 	
 	
 	

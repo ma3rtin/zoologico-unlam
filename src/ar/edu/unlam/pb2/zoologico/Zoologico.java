@@ -31,4 +31,13 @@ public class Zoologico {
 
 	}
 
+	public Animal buscarAnimal(Integer id) {
+		for (Animal animal : animales) {
+			if(animal.getId().equals(id)) {
+				return animal;
+			}
+		}
+		return null;
+	}
+
 }
