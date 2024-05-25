@@ -11,6 +11,7 @@ import ar.edu.unlam.pb2.zoologico.Animal;
 import ar.edu.unlam.pb2.zoologico.Cuidador;
 import ar.edu.unlam.pb2.zoologico.Leon;
 import ar.edu.unlam.pb2.zoologico.Persona;
+import ar.edu.unlam.pb2.zoologico.Visitante;
 import ar.edu.unlam.pb2.zoologico.Zoologico;
 
 public class ZoologicoTest {
@@ -54,6 +55,36 @@ public class ZoologicoTest {
 		
 	}
 	
+	@Test
+	public void queSePuedaComprarUnaEntradaBaseYUnaEntradaPremium() {
+		
+		Visitante visitante = this.crearVisitante("Marta", "Dulce", 40, 22415007, 1185447852, 1000.0);
+		Visitante visitante2 = this.crearVisitante("Pedro", "Gonzalez", 25, 45295114, 1163238456, 2000.0);
+
+		Boolean seComproEntradaBase = this.zoologico.comprarEntradaBase(visitante);
+		
+		Boolean seComproEntradaPremium = this.zoologico.comprarEntradaPremium(visitante2);
+		
+		Double valorEsperado = visitante.getDinero();
+		
+		Double valorObtenido = 500.0;
+		
+		Double valorEsperado2 = visitante2.getDinero();
+		
+		Double valorObtenido2 = 1000.0;
+		
+		assertEquals(valorEsperado,valorObtenido);
+		
+		assertEquals(valorEsperado2,valorObtenido2);
+		
+		//assertTrue(seComproEntradaBase);
+		
+		//assertTrue(seComproEntradaPremium);
+	}
+	
+	
+	
+	
 	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String sonido, String melena) {
         return new Leon(id,nombre,sexo,edad,sonido,melena);
     }
@@ -62,5 +93,8 @@ public class ZoologicoTest {
 		return new Cuidador(nombre, apellido, edad, dni, telefono, antiguedad);
 	}
 	
+	private Visitante crearVisitante(String nombre, String apellido, Integer edad, Integer dni, Integer telefono, Double dinero) {
+		return new Visitante(nombre, apellido, edad, dni, telefono, dinero);
+	}
 
 }
