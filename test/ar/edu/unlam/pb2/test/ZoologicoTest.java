@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.time.LocalTime;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.edu.unlam.pb2.zoologico.Cuidador;
@@ -12,17 +13,16 @@ import ar.edu.unlam.pb2.zoologico.Zoologico;
 
 public class ZoologicoTest {
 
-	@Test
-	public void queSePuedaCrearUnZoologico() {
-		String nombre = "Zoo 1";
-		LocalTime horaInicioVisita = LocalTime.of(8, 00);
-		LocalTime horaFinVisita = LocalTime.of(22, 0);
-		
-		Zoologico zoologico = new Zoologico(nombre, horaInicioVisita, horaFinVisita);
-		
-		assertNotNull(zoologico);
+	private static final String nombre = "Zoo 1";
+	private LocalTime horaInicioVisita = LocalTime.of(8, 00);
+	private LocalTime horaFinVisita = LocalTime.of(22, 0);
+	private Zoologico zoologico;
+
+	@Before
+	public void init() {
+		this.zoologico = new Zoologico(nombre, horaInicioVisita, horaFinVisita);
 	}
-	
+
 	@Test
 	public void queSePuedaAsignarPersonalAUnZoologico() {
 		String nombre = "Juan";
@@ -30,17 +30,11 @@ public class ZoologicoTest {
 		Integer edad = 34;
 		Integer dni = 1233413;
 		Integer telefono = 111222233;
-		
+
 		Persona cuidador1 = new Cuidador(nombre, apellido, edad, dni, telefono);
-		
-		String nombreZoo = "Zoo 1";
-		LocalTime horaInicioVisita = LocalTime.of(8, 00);
-		LocalTime horaFinVisita = LocalTime.of(22, 0);
-		
-		Zoologico zoologico = new Zoologico(nombre, horaInicioVisita, horaFinVisita);	
-		
+
 		Boolean agregado = zoologico.agregarCuidador(cuidador1);
-		
+
 		assertTrue(agregado);
 	}
 
