@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import ar.edu.unlam.pb2.zoologico.Animal;
 import ar.edu.unlam.pb2.zoologico.Cuidador;
+import ar.edu.unlam.pb2.zoologico.Jaula;
 import ar.edu.unlam.pb2.zoologico.Leon;
 import ar.edu.unlam.pb2.zoologico.Persona;
 import ar.edu.unlam.pb2.zoologico.Visitante;
@@ -32,69 +33,110 @@ public class ZoologicoTest {
 		Boolean cuidadorAgregado = zoologico.agregarCuidador(cuidador);
 		assertTrue(cuidadorAgregado);
 	}
-	
+
 	@Test
 	public void queSePuedaAgregarUnAnimalAlZoologico() {
 		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
 		Boolean animalAgregado = this.zoologico.agregarAnimal(leon);
 		assertTrue(animalAgregado);
 	}
-	
+
 	@Test
 	public void queSePuedaAlimentarUnAnimal() {
 		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
 		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10);
-		
+
 		this.zoologico.agregarAnimal(leon);
 		this.zoologico.agregarCuidador(cuidador);
-		
+
 		Animal animalBuscado = this.zoologico.buscarAnimal(1);
-		
-		Boolean seAlimento = cuidador.alimentarAnimal(animalBuscado,"Carne");
+
+		Boolean seAlimento = cuidador.alimentarAnimal(animalBuscado, "Carne");
 		assertTrue(seAlimento);
-		
+
 	}
-	
+
 	@Test
 	public void queSePuedaComprarUnaEntradaBaseYUnaEntradaPremium() {
-		
+
 		Visitante visitante = this.crearVisitante("Marta", "Dulce", 40, 22415007, 1185447852, 1000.0);
 		Visitante visitante2 = this.crearVisitante("Pedro", "Gonzalez", 25, 45295114, 1163238456, 2000.0);
 
 		Boolean seComproEntradaBase = this.zoologico.comprarEntradaBase(visitante);
-		
+
 		Boolean seComproEntradaPremium = this.zoologico.comprarEntradaPremium(visitante2);
-		
+
 		Double valorEsperado = visitante.getDinero();
-		
+
 		Double valorObtenido = 500.0;
-		
+
 		Double valorEsperado2 = visitante2.getDinero();
-		
+
 		Double valorObtenido2 = 1000.0;
-		
-		assertEquals(valorEsperado,valorObtenido);
-		
-		assertEquals(valorEsperado2,valorObtenido2);
-		
-		//assertTrue(seComproEntradaBase);
-		
-		//assertTrue(seComproEntradaPremium);
+
+		assertEquals(valorEsperado, valorObtenido);
+
+		assertEquals(valorEsperado2, valorObtenido2);
+
+		// assertTrue(seComproEntradaBase);
+
+		// assertTrue(seComproEntradaPremium);
+	}
+
+	@Test
+	public void dadoQueExisteUnZoologicoSePuedenAgregarJaulas() {
+		Integer numero = 1;
+		Character area = 'A';
+		String tamanio = "Grande"; // Podría ser enum(GRANDE, MEDIANA, CHICA) y limitar cantidad de animales que entran
+
+		Jaula jaula = this.crearJaula(numero, area, tamanio); 
+
+		Boolean jaulaAgregada = this.zoologico.agregarJaula(jaula);
+
+		assertTrue(jaulaAgregada);
+	}
+	
+	@Test
+	public void dadoQueExisteUnZoologicoConUnaJaulaSePuedeAsignarCuidador() {
+			Jaula jaula = this.crearJaula(1, 'A', "Mediano");
+			this.zoologico.agregarJaula(jaula);
+			Cuidador cuidador = this.crearCuidador("Pepa", "Pig", 29, 1111111, 1111111, 8);
+			
+			Boolean cuidadorAgregado = this.zoologico.agregarCuidadorAJaula(jaula, cuidador);
+			
+			assertTrue(cuidadorAgregado);
 	}
 	
 	
-	
-	
+	@Test
+	public void dadoQueExisteUnZoologicoConUnaJaulaSePuedeAsignarCuidadorAnimal() {
+		Jaula jaula = this.crearJaula(1, 'A', "Chica");
+		Animal leon = this.crearLeon(1, "Pepe", 'M', 10, "ruarrrr", "Marrón");
+		Cuidador cuidador = this.crearCuidador("Pepa", "Pig", 29, 1111111, 1111111, 8);
+		
+		this.zoologico.agregarJaula(jaula);
+		
+		Boolean cuidadorAnimalAgregado = this.zoologico.agregarCuidadorAnimalAJaula(jaula, cuidador, leon);
+		
+		assertTrue(cuidadorAnimalAgregado);
+	}
+
 	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String sonido, String melena) {
-        return new Leon(id,nombre,sexo,edad,sonido,melena);
-    }
-	
-	private Cuidador crearCuidador(String nombre, String apellido, Integer edad, Integer dni, Integer telefono, Integer antiguedad) {
+		return new Leon(id, nombre, sexo, edad, sonido, melena);
+	}
+
+	private Cuidador crearCuidador(String nombre, String apellido, Integer edad, Integer dni, Integer telefono,
+			Integer antiguedad) {
 		return new Cuidador(nombre, apellido, edad, dni, telefono, antiguedad);
 	}
-	
-	private Visitante crearVisitante(String nombre, String apellido, Integer edad, Integer dni, Integer telefono, Double dinero) {
+
+	private Visitante crearVisitante(String nombre, String apellido, Integer edad, Integer dni, Integer telefono,
+			Double dinero) {
 		return new Visitante(nombre, apellido, edad, dni, telefono, dinero);
+	}
+	
+	private Jaula crearJaula(Integer numero, Character area, String tamanio) {
+		return new Jaula(numero, area, tamanio);
 	}
 
 }
