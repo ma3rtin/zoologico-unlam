@@ -111,6 +111,15 @@ public class ZoologicoTest {
 		
 	}
 	
+	@Test
+	public void queSePuedaVerEspectaculoDeDelfines() {
+		Visitante visitante = this.crearVisitante("Marta", "Dulce", 40, 22415007, 1185447852, 1000.0);
+		this.zoologico.comprarEntradaPremium(visitante);
+		this.zoologico.visitarAcuario(visitante);
+		Boolean seVio = this.zoologico.verEspectaculoDeDelfines(visitante);
+		assertTrue(seVio);
+	}
+	
 	
 	
 	

@@ -16,6 +16,7 @@ public class Zoologico implements Acuario {
 	private Double precioEntradaBase;
 	private Double precioEntradaPremium;
 	private Set<Visitante> visitantes;
+	private List<Delfin> delfines;
 	
 	
 	
@@ -28,6 +29,7 @@ public class Zoologico implements Acuario {
 		this.precioEntradaBase = 500.0;
 		this.precioEntradaPremium = 1000.0;
 		this.visitantes = new HashSet<>();
+		this.delfines = new ArrayList<>();
 	}
 
 	public Boolean agregarCuidador(Persona cuidador) {
@@ -84,6 +86,23 @@ public class Zoologico implements Acuario {
 				pez.alimentar("Gusano");
 				
 			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean verEspectaculoDeDelfines(Visitante visitante) {
+		Delfin delfin = new Delfin(1,"Carlos",'M',5,"uuuuhhh uhhhhh");
+		Delfin delfin2 = new Delfin(2,"Ricardo",'M',6,"uuuuhhh uhhhhh");
+		Delfin delfin3 = new Delfin(3,"Julian",'M',7,"uuuuhhh uhhhhh");
+		if(visitarAcuario(visitante)) {
+			delfines.add(delfin);
+			delfines.add(delfin2);
+			delfines.add(delfin3);
+			delfin.saltar();
+			delfin2.saltar();
+			delfin3.saltar();
 			return true;
 		}
 		return false;
