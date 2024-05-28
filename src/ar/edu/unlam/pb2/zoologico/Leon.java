@@ -17,5 +17,5 @@ public class Leon extends Animal {
 		}
 		return true;
 	}
-
+	
 }

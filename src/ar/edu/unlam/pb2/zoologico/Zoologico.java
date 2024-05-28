@@ -65,4 +65,9 @@ public class Zoologico {
 		return false;
 		
 	}
+
+	public Boolean removerAnimal(Animal animal) {
+		return this.animales.remove(animal);
+	}
+
 }

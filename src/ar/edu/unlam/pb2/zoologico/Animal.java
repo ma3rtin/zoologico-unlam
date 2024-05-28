@@ -13,6 +13,8 @@ public abstract class Animal {
 	public Animal (Integer id,String nombre, Character sexo, Integer edad, String sonido) {
 		this.id = id;
 	}
+	
+//	public abstract String emitirSonido();
 
 	public String getAlimento() {
 		return alimento;
