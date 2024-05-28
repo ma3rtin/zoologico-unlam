@@ -51,6 +51,7 @@ public class Zoologico {
 	public Boolean comprarEntradaBase(Visitante visitante) {
 		if(visitante.getDinero() >= this.precioEntradaBase) {
 			visitante.setDinero(visitante.getDinero() - this.precioEntradaBase);
+			visitante.setTipoEntrada(TipoDeEntrada.ENTRADA_BASE);
 			return this.visitantes.add(visitante);
 		}
 		return false;
@@ -60,9 +61,29 @@ public class Zoologico {
 	public Boolean comprarEntradaPremium(Visitante visitante) {
 		if(visitante.getDinero() >= this.precioEntradaPremium) {
 			visitante.setDinero(visitante.getDinero() - this.precioEntradaPremium);
+			visitante.setTipoEntrada(TipoDeEntrada.ENTRADA_PREMIUM);
 			return this.visitantes.add(visitante);
 		}
 		return false;
 		
+	}
+
+	public Boolean visitarAquario(Visitante visitante) {
+		if(visitante.getTipoEntrada().equals(TipoDeEntrada.ENTRADA_PREMIUM)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean alimentarALosPeses(Visitante visitante,ArrayList<Pez> peces) {
+		
+		if(visitarAquario(visitante)) {
+			for (Pez pez : peces) {
+				pez.alimentar("Gusano");
+				
+			}
+			return true;
+		}
+		return false;
 	}
 }
