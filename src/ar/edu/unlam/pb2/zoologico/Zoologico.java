@@ -79,7 +79,7 @@ public class Zoologico implements Acuario {
 	}
 	
 	@Override
-	public Boolean alimentarALosPeses(Visitante visitante,ArrayList<Pez> peces) {
+	public Boolean alimentarALosPeces(Visitante visitante,ArrayList<Pez> peces) {
 		
 		if(visitarAcuario(visitante)) {
 			for (Pez pez : peces) {

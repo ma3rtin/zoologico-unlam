@@ -105,7 +105,7 @@ public class ZoologicoTest {
 		peces.add(pez1);
 		peces.add(pez2);
 		peces.add(pez3);
-		Boolean seAlimento = this.zoologico.alimentarALosPeses(visitante,peces);
+		Boolean seAlimento = this.zoologico.alimentarALosPeces(visitante,peces);
 		
 		assertTrue(seAlimento);
 		
