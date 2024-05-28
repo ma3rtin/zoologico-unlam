@@ -70,4 +70,9 @@ public class Zoologico {
 		return this.animales.remove(animal);
 	}
 
+	public void comprarAlimento(Visitante visitante) {
+		
+		
+	}
+
 }

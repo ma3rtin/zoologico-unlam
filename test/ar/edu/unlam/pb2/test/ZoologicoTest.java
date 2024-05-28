@@ -12,6 +12,7 @@ import ar.edu.unlam.pb2.zoologico.Cuidador;
 import ar.edu.unlam.pb2.zoologico.Habitat;
 import ar.edu.unlam.pb2.zoologico.Jirafa;
 import ar.edu.unlam.pb2.zoologico.Leon;
+import ar.edu.unlam.pb2.zoologico.Pato;
 import ar.edu.unlam.pb2.zoologico.Persona;
 import ar.edu.unlam.pb2.zoologico.Pinguino;
 import ar.edu.unlam.pb2.zoologico.Tigre;
@@ -39,14 +40,14 @@ public class ZoologicoTest {
 	
 	@Test
 	public void queSePuedaAgregarUnAnimalAlZoologico() {
-		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
+		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "rubia");
 		Boolean animalAgregado = this.zoologico.agregarAnimal(leon);
 		assertTrue(animalAgregado);
 	}
 	
 	@Test
 	public void queSePuedaAlimentarUnAnimal() {
-		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
+		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "rubia");
 		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10);
 		
 		this.zoologico.agregarAnimal(leon);
@@ -88,7 +89,7 @@ public class ZoologicoTest {
 	
 	@Test
 	public void queSePuedaRemoverUnAnimalDelZoologico() {
-	    Animal tigre = this.crearTigre(2, "Tiger", 'M', 4, "grrr", 20);
+	    Animal tigre = this.crearTigre(2, "Tiger", 'M', 4, 20);
 	    this.zoologico.agregarAnimal(tigre);
 	    Boolean animalRemovido = this.zoologico.removerAnimal(tigre);
 	    assertTrue(animalRemovido);
@@ -98,7 +99,7 @@ public class ZoologicoTest {
 	@Test
 	public void queSePuedaAgregarAnimalesAUnHabitat() {
 		Habitat habitatPinguinos = new Habitat("Antártida",3);
-		Animal pinguino = this.crearPinguino(1, "Felipe", 'M', 2, "honk", "corto");
+		Animal pinguino = this.crearPinguino(1, "Felipe", 'M', 2, "corto");
 		
 		Boolean seAgrego = habitatPinguinos.agregarAnimal(pinguino);
 		assertTrue(seAgrego);
@@ -107,10 +108,10 @@ public class ZoologicoTest {
 	@Test
 	public void queNoSePuedanAgregarMasAnimalesAUnHabitatLleno() {
 		Habitat habitatPinguinos = new Habitat("Antártida",3);
-		Animal pinguino1 = this.crearPinguino(1, "Felipe", 'M', 2, "honk", "corto");
-		Animal pinguino2 = this.crearPinguino(2, "Fiona", 'F', 3, "honk", "corto");
-		Animal pinguino3 = this.crearPinguino(3, "Jose", 'M', 5, "honk", "corto");
-		Animal pinguino4 = this.crearPinguino(4, "Skipper", 'M', 6, "honk", "corto");
+		Animal pinguino1 = this.crearPinguino(1, "Felipe", 'M', 2,"corto");
+		Animal pinguino2 = this.crearPinguino(2, "Fiona", 'F', 3, "corto");
+		Animal pinguino3 = this.crearPinguino(3, "Jose", 'M', 5,"corto");
+		Animal pinguino4 = this.crearPinguino(4, "Skipper", 'M', 6,"corto");
 		
 		habitatPinguinos.agregarAnimal(pinguino1);
 		habitatPinguinos.agregarAnimal(pinguino2);
@@ -121,20 +122,39 @@ public class ZoologicoTest {
 		assertFalse(seAgrego);
 	}
 	
-	private Animal crearPinguino(Integer id, String nombre, Character sexo, Integer edad, String sonido, String plumaje) {
-		return new Pinguino(id,nombre,sexo,edad,sonido,plumaje);
+	@Test
+	public void queUnAnimalPuedaEmitirSuSonido() {
+		Animal leon = this.crearLeon(1, "Juana", 'F', 5, "rubia");
+		String sonidoEmitido = leon.emitirSonido();
+		String sonidoEsperado = "ruar";
+		
+		assertEquals(sonidoEmitido, sonidoEsperado);
+		
+		Animal pato = this.crearPato(5, "Lucas", 'M', 2, 35.5);
+		sonidoEmitido = pato.emitirSonido();
+		sonidoEsperado = "cuac";
+		
+		assertEquals(sonidoEmitido, sonidoEsperado);
 	}
 	
-	private Animal crearJirafa(Integer id, String nombre, Character sexo, Integer edad, String sonido, Double longitudCuello) {
-        return new Jirafa(id,nombre,sexo,edad,sonido,longitudCuello);
+	private Animal crearPato(Integer id, String nombre, Character sexo, Integer edad, Double longitudPico) {
+		return new Pato(id,nombre,sexo,edad,longitudPico);
 	}
 	
-	private Animal crearTigre(Integer id, String nombre, Character sexo, Integer edad, String sonido, Integer rayas) {
-        return new Tigre(id,nombre,sexo,edad,sonido,rayas);
+	private Animal crearPinguino(Integer id, String nombre, Character sexo, Integer edad, String plumaje) {
+		return new Pinguino(id,nombre,sexo,edad,plumaje);
 	}
 	
-	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String sonido, String melena) {
-        return new Leon(id,nombre,sexo,edad,sonido,melena);
+	private Animal crearJirafa(Integer id, String nombre, Character sexo, Integer edad, Double longitudCuello) {
+        return new Jirafa(id,nombre,sexo,edad,longitudCuello);
+	}
+	
+	private Animal crearTigre(Integer id, String nombre, Character sexo, Integer edad, Integer rayas) {
+        return new Tigre(id,nombre,sexo,edad,rayas);
+	}
+	
+	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String melena) {
+        return new Leon(id,nombre,sexo,edad,melena);
     }
 	
 	private Cuidador crearCuidador(String nombre, String apellido, Integer edad, Integer dni, Integer telefono, Integer antiguedad) {

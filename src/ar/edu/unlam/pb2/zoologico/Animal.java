@@ -8,13 +8,13 @@ public abstract class Animal {
 	private Integer id;
 	private Character sexo;
 	private String alimento;
-	private String sonido;
+//	private String sonido;
 	
-	public Animal (Integer id,String nombre, Character sexo, Integer edad, String sonido) {
+	public Animal (Integer id,String nombre, Character sexo, Integer edad) {
 		this.id = id;
 	}
 	
-//	public abstract String emitirSonido();
+	public abstract String emitirSonido();
 
 	public String getAlimento() {
 		return alimento;
