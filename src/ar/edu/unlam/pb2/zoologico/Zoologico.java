@@ -16,7 +16,7 @@ public class Zoologico {
 	private Double precioEntradaBase;
 	private Double precioEntradaPremium;
 	private Set<Visitante> visitantes;
-	
+	private Set<VisitaGuiada> visitasGuiadas;
 	
 	
 	public Zoologico(String nombre, LocalTime horaInicioVisita, LocalTime horaFinVisita) {
@@ -28,6 +28,7 @@ public class Zoologico {
 		this.precioEntradaBase = 500.0;
 		this.precioEntradaPremium = 1000.0;
 		this.visitantes = new HashSet<>();
+		this.visitasGuiadas = new HashSet<>();
 	}
 
 	public Boolean agregarCuidador(Persona cuidador) {
@@ -64,5 +65,19 @@ public class Zoologico {
 		}
 		return false;
 		
+	}
+
+	public Boolean agregarVisitaGuiada(VisitaGuiada visita) {
+		return this.visitasGuiadas.add(visita);
+		
+	}
+
+	public VisitaGuiada buscarVisitaGuiada(Integer id) {
+		for (VisitaGuiada visita : visitasGuiadas) {
+			if(visita.getId().equals(id)) {
+				return visita;
+			}
+		}
+		return null;
 	}
 }
