@@ -86,18 +86,18 @@ public class ZoologicoTest {
 	}
 	
 	@Test
-	public void queSePuedaVisitarElAquarioSiElVisitanteTieneEntradaPremium() {
+	public void queSePuedaVisitarElAcuarioSiElVisitanteTieneEntradaPremium() {
 		Visitante visitante = this.crearVisitante("Marta", "Dulce", 40, 22415007, 1185447852, 1000.0);
 		this.zoologico.comprarEntradaPremium(visitante);
-		Boolean seVisito = this.zoologico.visitarAquario(visitante);
+		Boolean seVisito = this.zoologico.visitarAcuario(visitante);
 		assertTrue(seVisito);
 	}
 	
 	@Test
-	public void queSePuedaAlimentarALosPesesSiVisitasteElAquario() {
+	public void queSePuedaAlimentarALosPesesSiVisitasteElAcuario() {
 		Visitante visitante = this.crearVisitante("Marta", "Dulce", 40, 22415007, 1185447852, 1000.0);
 		this.zoologico.comprarEntradaPremium(visitante);
-		this.zoologico.visitarAquario(visitante);
+		this.zoologico.visitarAcuario(visitante);
 		Pez pez1 = this.crearPez(1, "roberto", 'M', 4, "glu glu");
 		Pez pez2 = this.crearPez(2, "flavio", 'M', 4, "glu glu");
 		Pez pez3 = this.crearPez(3, "Ernestito", 'M', 4, "glu glu");

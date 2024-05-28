@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Zoologico {
+public class Zoologico implements Acuario {
 
 	private LocalTime horaFinVisita;
 	private LocalTime horaInicioVisita;
@@ -68,16 +68,18 @@ public class Zoologico {
 		
 	}
 
-	public Boolean visitarAquario(Visitante visitante) {
+	@Override
+	public Boolean visitarAcuario(Visitante visitante) {
 		if(visitante.getTipoEntrada().equals(TipoDeEntrada.ENTRADA_PREMIUM)) {
 			return true;
 		}
 		return false;
 	}
 	
+	@Override
 	public Boolean alimentarALosPeses(Visitante visitante,ArrayList<Pez> peces) {
 		
-		if(visitarAquario(visitante)) {
+		if(visitarAcuario(visitante)) {
 			for (Pez pez : peces) {
 				pez.alimentar("Gusano");
 				
