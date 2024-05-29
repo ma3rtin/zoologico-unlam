@@ -9,6 +9,6 @@ Este proyecto es creado a partir de la metodología TDD, en el mismo se implemen
 ## Autores
 
 - [Giuliana Menicucci](https://github.com/gmenii)
-- [Gonzalo Mirko](https://github.com/gonzamirko)
+- [Gonzalo Nahuel Greatti](https://github.com/gonzamirko)
 - [Pedro Ricartes](https://github.com/ricartes123)
 - [Martín Mutuverría](https://github.com/ma3rtin)
