@@ -7,6 +7,13 @@ public class Tigre extends Animal {
 	public Tigre(Integer id, String nombre, Character sexo, Integer edad, Integer rayas) {
 		super(id, nombre, sexo, edad);
 		this.rayas = rayas;
+
+	private String patronRayas; 
+	
+	public Tigre(Integer id, String nombre, Character sexo, Integer edad, String sonido, String patronRayas) {
+		super(id, nombre, sexo, edad, sonido);
+		this.patronRayas = patronRayas;
+		
 	}
 
 	@Override
@@ -19,4 +26,10 @@ public class Tigre extends Animal {
 	public String emitirSonido() {
 		return "grrr";
 	}
+		if(!alimento.equals("Carne")) {
+			return false;
+		}
+		return true;
+	}
+
 }
