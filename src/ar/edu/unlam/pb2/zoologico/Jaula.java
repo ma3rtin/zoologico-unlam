@@ -1,34 +1,49 @@
 package ar.edu.unlam.pb2.zoologico;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Jaula {
 
-	
-	//ordenarJaulasPorNumero() y ordenarJualasPorArea();
+	// enum habitat ?
 	private Integer numero;
-	private Character area;
-	private String tamanio;
-	private Set<CuidadorAnimal> cuidadoresAnimales;
+	private String tamanio;//
+	private Set<Animal> animales;
 
-	public Jaula(Integer numero, Character area, String tamanio) {
+	public Jaula(Integer numero, String tamanio) {
 		this.numero = numero;
-		this.area = area;
 		this.tamanio = tamanio;
-		this.cuidadoresAnimales = new HashSet<>();
+		this.animales = new HashSet<>();
+	}
+
+	public Boolean agregarAnimal(Animal animal) {
+		return this.animales.add(animal);
+	}
+
+	public Set<Animal> getAnimales() {
+		return this.animales;
 	}
 
 	public Integer getNumero() {
 		return this.numero;
 	}
 
-	public boolean agregarCuidador(CuidadorAnimal cuidadorAnimal) {
-		return this.cuidadoresAnimales.add(cuidadorAnimal);
+	@Override
+	public int hashCode() {
+		return Objects.hash(numero);
 	}
 
-	public Boolean agregarCuidadorAnimal(Cuidador cuidador, Animal animal) {
-		return this.cuidadoresAnimales.add(new CuidadorAnimal(cuidador, animal));
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Jaula other = (Jaula) obj;
+		return Objects.equals(numero, other.numero);
 	}
 
 }

@@ -3,6 +3,8 @@ package ar.edu.unlam.pb2.test;
 import static org.junit.Assert.*;
 
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,33 +30,87 @@ public class ZoologicoTest {
 	}
 
 	@Test
-	public void queSePuedaAsignarPersonalAUnZoologico() {
-		Persona cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10);
-		Boolean cuidadorAgregado = zoologico.agregarCuidador(cuidador);
-		assertTrue(cuidadorAgregado);
+	public void dadoQueExisteUnZoologicoSePuedenAgregarJaulas() {
+		Integer numero = 1;
+		Character area = 'A';
+		String tamanio = "Grande"; // Podría ser enum(GRANDE, MEDIANA, CHICA) y limitar cantidad de animales que
+									// entran
+
+		Jaula jaula = this.crearJaula(numero, area, tamanio);
+
+		Boolean jaulaAgregada = this.zoologico.agregarJaula(jaula);
+
+		assertTrue(jaulaAgregada);
 	}
 
 	@Test
-	public void queSePuedaAgregarUnAnimalAlZoologico() {
+	public void dadoQueExisteUnaJualaEnElZooSeLePuedeAgregarUnAnimal() {
 		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
-		Boolean animalAgregado = this.zoologico.agregarAnimal(leon);
+		Jaula jaula = this.crearJaula(1, 'A', "Chico");
+		int numeroJaula = 1;
+
+		this.zoologico.agregarJaula(jaula);
+
+		Boolean animalAgregado = this.zoologico.agregarAnimalAJaula(leon, numeroJaula);
 		assertTrue(animalAgregado);
 	}
 
 	@Test
-	public void queSePuedaAlimentarUnAnimal() {
-		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
+	public void dadoQueExisteUnaJaulaEnElZooSeLePuedeAsignarUnCuidador() {
 		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10);
+		Jaula jaula = this.crearJaula(1, 'A', "Chico");
+		int numeroJaula = 1;
 
-		this.zoologico.agregarAnimal(leon);
-		this.zoologico.agregarCuidador(cuidador);
+		this.zoologico.agregarJaula(jaula);
 
-		Animal animalBuscado = this.zoologico.buscarAnimal(1);
-
-		Boolean seAlimento = cuidador.alimentarAnimal(animalBuscado, "Carne");
-		assertTrue(seAlimento);
-
+		Boolean animalAgregado = this.zoologico.asignarCuidadorAJaula(cuidador, numeroJaula);
+		assertTrue(animalAgregado);
 	}
+
+	@Test
+	public void dadoQueExisteUnaJaulaEnElZooSeLePuedeAgregarVariosAnimales() {
+		Jaula jaula = this.crearJaula(1, 'A', "Chico");
+
+		this.zoologico.agregarJaula(jaula);
+
+		Animal leon1 = this.crearLeon(1000, "Giuli", 'F', 5, "ruar", "rubia");
+		Animal leon2 = this.crearLeon(1001, "Pedro", 'F', 5, "ruar", "marron");
+		Animal leon3 = this.crearLeon(1002, "Gonza", 'F', 5, "ruar", "negra");
+
+		Boolean animalAgregado1 = this.zoologico.agregarAnimalAJaula(leon1, 1);
+		Boolean animalAgregado2 = this.zoologico.agregarAnimalAJaula(leon2, 1);
+		Boolean animalAgregado3 = this.zoologico.agregarAnimalAJaula(leon3, 1);
+
+		assertTrue(animalAgregado1);
+		assertTrue(animalAgregado2);
+		assertTrue(animalAgregado3);
+	}
+
+
+	@Test
+	public void dadoQueExistenVariasJaulasSePuedenObtenerLosAnimalesQueContieneUnaDeEllas() {
+		Jaula jaula1 = this.crearJaula(1, 'A', "Chico");
+		Jaula jaula2 = this.crearJaula(2, 'A', "Mediano");
+		Jaula jaula3 = this.crearJaula(3, 'A', "Grande");
+
+		this.zoologico.agregarJaula(jaula1);
+		this.zoologico.agregarJaula(jaula2);
+		this.zoologico.agregarJaula(jaula3);
+
+		Animal leon1 = this.crearLeon(1000, "Giuli", 'F', 5, "ruar", "rubia");
+		Animal leon2 = this.crearLeon(1001, "Pedro", 'F', 5, "ruar", "marron");
+		Animal leon3 = this.crearLeon(1002, "Gonza", 'F', 5, "ruar", "negra");
+
+
+		this.zoologico.agregarAnimalAJaula(leon1, 2);
+		this.zoologico.agregarAnimalAJaula(leon2, 2);
+		this.zoologico.agregarAnimalAJaula(leon3, 2);
+		
+		Set<Animal> animalesDeLaJaula = this.zoologico.buscarAnimalesDeUnaJaula(2);
+		
+		assertEquals(3, animalesDeLaJaula.size());
+	}
+
 
 	@Test
 	public void queSePuedaComprarUnaEntradaBaseYUnaEntradaPremium() {
@@ -83,48 +139,6 @@ public class ZoologicoTest {
 		// assertTrue(seComproEntradaPremium);
 	}
 
-	@Test
-	public void dadoQueExisteUnZoologicoSePuedenAgregarJaulas() {
-		Integer numero = 1;
-		Character area = 'A';
-		String tamanio = "Grande"; // Podría ser enum(GRANDE, MEDIANA, CHICA) y limitar cantidad de animales que entran
-
-		Jaula jaula = this.crearJaula(numero, area, tamanio); 
-
-		Boolean jaulaAgregada = this.zoologico.agregarJaula(jaula);
-
-		assertTrue(jaulaAgregada);
-	}
-	
-	@Test
-	public void dadoQueExisteUnZoologicoConUnaJaulaSePuedeAsignarCuidador() {
-			Jaula jaula = this.crearJaula(1, 'A', "Mediano");
-			this.zoologico.agregarJaula(jaula);
-			Cuidador cuidador = this.crearCuidador("Pepa", "Pig", 29, 1111111, 1111111, 8);
-			
-			Boolean cuidadorAgregado = this.zoologico.agregarCuidadorAJaula(jaula, cuidador);
-			
-			assertTrue(cuidadorAgregado);
-	}
-	
-	
-	@Test
-	public void dadoQueExisteUnZoologicoConUnaJaulaSePuedeAsignarCuidadorAnimal() {
-		Jaula jaula = this.crearJaula(1, 'A', "Chica");
-		Animal leon = this.crearLeon(1, "Pepe", 'M', 10, "ruarrrr", "Marrón");
-		Cuidador cuidador = this.crearCuidador("Pepa", "Pig", 29, 1111111, 1111111, 8);
-		
-		this.zoologico.agregarJaula(jaula);
-		
-		Boolean cuidadorAnimalAgregado = this.zoologico.agregarCuidadorAnimalAJaula(jaula, cuidador, leon);
-		
-		assertTrue(cuidadorAnimalAgregado);
-	}
-
-	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String sonido, String melena) {
-		return new Leon(id, nombre, sexo, edad, sonido, melena);
-	}
-
 	private Cuidador crearCuidador(String nombre, String apellido, Integer edad, Integer dni, Integer telefono,
 			Integer antiguedad) {
 		return new Cuidador(nombre, apellido, edad, dni, telefono, antiguedad);
@@ -134,9 +148,13 @@ public class ZoologicoTest {
 			Double dinero) {
 		return new Visitante(nombre, apellido, edad, dni, telefono, dinero);
 	}
-	
+
 	private Jaula crearJaula(Integer numero, Character area, String tamanio) {
-		return new Jaula(numero, area, tamanio);
+		return new Jaula(numero, tamanio);
+	}
+
+	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String sonido, String melena) {
+		return new Leon(id, nombre, sexo, edad, sonido, melena);
 	}
 
 }
