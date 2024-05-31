@@ -5,7 +5,7 @@ public class Cuidador extends Persona {
 	private Integer antiguedad;
 	private Double sueldo;
 	
-	public Cuidador(String nombre, String apellido, Integer edad, Integer dni, Integer telefono, Integer antiguedad, Double sueldo) {
+	public Cuidador(String nombre, String apellido, Integer edad, Integer dni, Integer telefono, Integer antiguedad) {
 		super(nombre, apellido, edad, dni, telefono);
 		this.antiguedad = antiguedad;
 		this.sueldo = sueldo;
