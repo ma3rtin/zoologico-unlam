@@ -1,5 +1,7 @@
 package ar.edu.unlam.pb2.zoologico;
 
+import java.util.Objects;
+
 public abstract class Animal {
 	private Double peso;
 	//private Double altura;
@@ -31,6 +33,23 @@ public abstract class Animal {
 	}
 
 	protected abstract Boolean alimentar(String alimento);
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Animal other = (Animal) obj;
+		return Objects.equals(id, other.id);
+	}
 	
 	
 	
