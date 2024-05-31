@@ -1,23 +1,26 @@
 package ar.edu.unlam.pb2.test;
 
 import static org.junit.Assert.*;
-
 import java.time.LocalTime;
-
 import java.util.ArrayList;
-
 import java.util.HashSet;
 import java.util.Set;
-
-
 import org.junit.Before;
 import org.junit.Test;
-
 import ar.edu.unlam.pb2.zoologico.Animal;
+import ar.edu.unlam.pb2.zoologico.Loro;
 import ar.edu.unlam.pb2.zoologico.Cuidador;
+import ar.edu.unlam.pb2.zoologico.Habitat;
+import ar.edu.unlam.pb2.zoologico.Jirafa;
+import ar.edu.unlam.pb2.zoologico.Elefante;
 import ar.edu.unlam.pb2.zoologico.Jaula;
 import ar.edu.unlam.pb2.zoologico.Leon;
+import ar.edu.unlam.pb2.zoologico.Pato;
 import ar.edu.unlam.pb2.zoologico.Persona;
+import ar.edu.unlam.pb2.zoologico.Pinguino;
+import ar.edu.unlam.pb2.zoologico.Tigre;
+import ar.edu.unlam.pb2.zoologico.Tigre;
+import ar.edu.unlam.pb2.zoologico.VisitaGuiada;
 import ar.edu.unlam.pb2.zoologico.TipoDeEntrada;
 import ar.edu.unlam.pb2.zoologico.Visitante;
 import ar.edu.unlam.pb2.zoologico.Pez;
@@ -36,6 +39,14 @@ public class ZoologicoTest {
 	}
 
 	@Test
+
+/*	public void queSePuedaAsignarPersonalAUnZoologico() {
+		Persona cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10, 60000.0);
+		Boolean cuidadorAgregado = zoologico.agregarCuidador(cuidador);
+		assertTrue(cuidadorAgregado);
+	}
+	*/
+	
 	public void dadoQueExisteUnZoologicoSePuedenAgregarJaulas() {
 		Integer numero = 1;
 		Character area = 'A';
@@ -47,9 +58,15 @@ public class ZoologicoTest {
 		Boolean jaulaAgregada = this.zoologico.agregarJaula(jaula);
 
 		assertTrue(jaulaAgregada);
+
 	}
 
 	@Test
+	public void queSePuedaAgregarUnAnimalAlZoologico() {
+		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "rubia");
+		Boolean animalAgregado = this.zoologico.agregarAnimal(leon);
+
+	public void queSePuedaAgregarUnAnimalLeonAlZoologico() {}
 	public void dadoQueExisteUnaJualaEnElZooSeLePuedeAgregarUnAnimal() {
 		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
 		Jaula jaula = this.crearJaula(1, 'A', "Chico");
@@ -62,8 +79,24 @@ public class ZoologicoTest {
 	}
 
 	@Test
+	public void queSePuedaAlimentarUnAnimal() {
+		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "rubia");
+/*	public void queSePuedaAlimentarUnAnimalLeon() {
+		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
+		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10, 60000.0);
+		
+		this.zoologico.agregarAnimal(leon);
+		this.zoologico.agregarCuidador(cuidador);
+		
+		Animal animalBuscado = this.zoologico.buscarAnimal(1);
+		
+		Boolean seAlimento = cuidador.alimentarAnimal(animalBuscado,"Carne");
+		assertTrue(seAlimento);
+	}
+	*/
+	
 	public void dadoQueExisteUnaJaulaEnElZooSeLePuedeAsignarUnCuidador() {
-		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10);
+		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10,50000.0);
 		Jaula jaula = this.crearJaula(1, 'A', "Chico");
 		int numeroJaula = 1;
 
@@ -144,7 +177,85 @@ public class ZoologicoTest {
 
 		// assertTrue(seComproEntradaPremium);
 	}
+	
+	@Test
+	public void queSePuedaRemoverUnAnimalDelZoologico() {
+	    Animal tigre = this.crearTigre(2, "Tiger", 'M', 4, 20);
+	    this.zoologico.agregarAnimal(tigre);
+	    Boolean animalRemovido = this.zoologico.removerAnimal(tigre);
+	    assertTrue(animalRemovido);
+	    assertNull(this.zoologico.buscarAnimal(2));
+	}
+	
+	@Test
+	public void queSePuedaAgregarAnimalesAUnHabitat() {
+		Habitat habitatPinguinos = new Habitat("Antártida",3);
+		Animal pinguino = this.crearPinguino(1, "Felipe", 'M', 2, "corto");
+		
+		Boolean seAgrego = habitatPinguinos.agregarAnimal(pinguino);
+		assertTrue(seAgrego);
+	}
+	
+	@Test
+	public void queNoSePuedanAgregarMasAnimalesAUnHabitatLleno() {
+		Habitat habitatPinguinos = new Habitat("Antártida",3);
+		Animal pinguino1 = this.crearPinguino(1, "Felipe", 'M', 2,"corto");
+		Animal pinguino2 = this.crearPinguino(2, "Fiona", 'F', 3, "corto");
+		Animal pinguino3 = this.crearPinguino(3, "Jose", 'M', 5,"corto");
+		Animal pinguino4 = this.crearPinguino(4, "Skipper", 'M', 6,"corto");
+		
+		habitatPinguinos.agregarAnimal(pinguino1);
+		habitatPinguinos.agregarAnimal(pinguino2);
+		habitatPinguinos.agregarAnimal(pinguino3);
+		
+		Boolean seAgrego = habitatPinguinos.agregarAnimal(pinguino4);
+		
+		assertFalse(seAgrego);
+	}
+	
+	@Test
+	public void queUnAnimalPuedaEmitirSuSonido() {
+		Animal leon = this.crearLeon(1, "Juana", 'F', 5, "rubia");
+		String sonidoEmitido = leon.emitirSonido();
+		String sonidoEsperado = "ruar";
+		
+		assertEquals(sonidoEmitido, sonidoEsperado);
+		
+		Animal pato = this.crearPato(5, "Lucas", 'M', 2, 35.5);
+		sonidoEmitido = pato.emitirSonido();
+		sonidoEsperado = "cuac";
+		
+		assertEquals(sonidoEmitido, sonidoEsperado);
+	}
+	
+	private Animal crearPato(Integer id, String nombre, Character sexo, Integer edad, Double longitudPico) {
+		return new Pato(id,nombre,sexo,edad,longitudPico);
+	}
+	
+	private Animal crearPinguino(Integer id, String nombre, Character sexo, Integer edad, String plumaje) {
+		return new Pinguino(id,nombre,sexo,edad,plumaje);
+	}
+	
+	private Animal crearJirafa(Integer id, String nombre, Character sexo, Integer edad, Double longitudCuello) {
+        return new Jirafa(id,nombre,sexo,edad,longitudCuello);
+	}
+	
+	private Animal crearTigre(Integer id, String nombre, Character sexo, Integer edad, Integer rayas) {
+        return new Tigre(id,nombre,sexo,edad,rayas);
+	}
+	
+	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String melena) {
+        return new Leon(id,nombre,sexo,edad,melena);
+    }
+	
 
+	
+	@Test
+	public void queSePuedaAgregarUnAnimalLoroAlZoologico() {
+		Animal loro = this.crearLoro(2, "Lara", 'F', 10, "¡Squawk!", "rojo", true);
+		Boolean animalAgregado = this.zoologico.agregarAnimal(loro);
+		assertTrue(animalAgregado);
+	}
 	
 	@Test
 	public void queSePuedaVisitarElAcuarioSiElVisitanteTieneEntradaPremium() {
@@ -197,19 +308,89 @@ public class ZoologicoTest {
 			Integer antiguedad) {
 
 		return new Cuidador(nombre, apellido, edad, dni, telefono, antiguedad);
+
 	}
+	
+	@Test
+	public void queSePuedaAlimentarUnAnimalLoro() {
+		Animal loro = this.crearLoro(2, "Lara", 'F', 10, "¡Squawk!", "rojo", true);
+		Cuidador cuidador = this.crearCuidador("Roberta", "Funes", 25, 44689331, 1154268739, 5);
+		
+		this.zoologico.agregarAnimal(loro);
+		this.zoologico.agregarCuidador(cuidador);
+		
+		Animal animalBuscado = this.zoologico.buscarAnimal(2);
+		
+		Boolean seAlimento = cuidador.alimentarAnimal(animalBuscado,"Semillas");
+		assertTrue(seAlimento);
+}
+	
+	@Test
+	public void queSePuedaAgregarVisitaGuiada() {
+		VisitaGuiada visita = new VisitaGuiada(1, "Visita a los Leones", LocalTime.of(10, 0), 60, "Juan");
+		
+		 this.zoologico.agregarVisitaGuiada(visita);
+		 
+	     VisitaGuiada visitaObtenida = zoologico.buscarVisitaGuiada(1);
+	     
+	     assertNotNull(visitaObtenida);
+	}
+
+		@Test
+	public void queSePuedaAgregarUnAnimalElefanteAlZoologico() {
+		Animal elefante = this.crearElefante(8, "Dumbo", 'M', 50, "Trumpet!", 2.1);
+		Boolean animalAgregado = this.zoologico.agregarAnimal(elefante);
+		assertTrue(animalAgregado);
+	}
+	
+	
+		@Test
+	public void queSePuedaAlimentarUnAnimalElefante() {
+		Animal elefante = this.crearElefante(8, "Dumbo", 'M', 50, "Trumpet!", 2.1);
+		Cuidador cuidador2 = this.crearCuidador("Roberta", "Funes", 25, 44689331, 1154268739, 5);
+		
+		this.zoologico.agregarAnimal(elefante);
+		this.zoologico.agregarCuidador(cuidador2);
+		
+		Animal animalBuscado = this.zoologico.buscarAnimal(2);
+		
+		Boolean seAlimento = cuidador2.alimentarAnimal(animalBuscado,"Semillas");
+		assertTrue(seAlimento);
+	}
+	
+	@Test
+	public void queSePuedaAgregarUnAnimalTigreAlZoologico() {
+		Animal tigre = this.crearTigre(4, "Amur", 'M', 8, "Grrr", "Rayas Anchas");
+		Boolean animalAgregado = this.zoologico.agregarAnimal(tigre);
+		assertTrue(animalAgregado);
+	}
+	
+	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String sonido, String melena) {
+        return new Leon(id,nombre,sexo,edad,sonido,melena);
+    }
+		
 
 	private Visitante crearVisitante(String nombre, String apellido, Integer edad, Integer dni, Integer telefono,
 			Double dinero) {
 		return new Visitante(nombre, apellido, edad, dni, telefono, dinero);
 	}
+	
+	private Animal crearLoro(Integer id, String nombre, Character sexo, Integer edad, String sonido, String colorPlumas, Boolean puedeHablar) {
+        return new Loro(id,nombre,sexo,edad,sonido, colorPlumas, puedeHablar);
+    }
+	
+	private Animal crearElefante(Integer id, String nombre, Character sexo, Integer edad, String sonido, Double tamanioColmillos) {
+        return new Elefante(id,nombre,sexo,edad,sonido,tamanioColmillos);
+    }
+	
+	private Animal crearTigre(Integer id, String nombre, Character sexo, Integer edad, String sonido, String patronRayas) {
+        return new Tigre(id,nombre,sexo,edad,sonido,patronRayas);
+    }
 
+	
 	private Jaula crearJaula(Integer numero, Character area, String tamanio) {
 		return new Jaula(numero, tamanio);
 	}
 
-	private Animal crearLeon(Integer id, String nombre, Character sexo, Integer edad, String sonido, String melena) {
-		return new Leon(id, nombre, sexo, edad, sonido, melena);
-	}
-
+	
 }

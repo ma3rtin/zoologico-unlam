@@ -12,32 +12,59 @@ public class Zoologico implements Acuario {
 	private LocalTime horaFinVisita;
 	private LocalTime horaInicioVisita;
 	private String nombre;
-//	private List<Persona> cuidadores;
-//	private Set<Animal> animales;
+	private List<Persona> cuidadores;
+	private Set<Animal> animales;
 	private Double precioEntradaBase;
 	private Double precioEntradaPremium;
 	private Set<Visitante> visitantes;
+
+
+	private Set<VisitaGuiada> visitasGuiadas;
+	
+	
 
 	private List<Delfin> delfines;
 
 	private Set<CuidadorJaula> cuidadoresJaulas;
 
+
 	public Zoologico(String nombre, LocalTime horaInicioVisita, LocalTime horaFinVisita) {
 		this.nombre = nombre;
 		this.horaInicioVisita = horaInicioVisita;
 		this.horaFinVisita = horaFinVisita;
-//		this.cuidadores = new ArrayList<>();
-//		this.animales = new HashSet<>();
+		this.cuidadores = new ArrayList<>();
+		this.animales = new HashSet<>();
 		this.precioEntradaBase = 500.0;
 		this.precioEntradaPremium = 1000.0;
 
-		this.visitantes = new HashSet<>();
-		this.delfines = new ArrayList<>();
+
+		this.visitantes = new TreeSet<>();
+		this.visitasGuiadas = new HashSet<>();
 	}
 
+	 public Boolean agregarCuidador(Persona cuidador) {
+		return this.cuidadores.add(cuidador);
+	} 
 
+ public Boolean agregarAnimal(Animal animal) {
+		return this.animales.add(animal);
 
+	} 
+
+	public Animal buscarAnimal(Integer id) {
+		for (Animal animal : animales) {
+			if(animal.getId().equals(id)) {
+				return animal;
+			}
+		}
+		return null;
+
+	} 
+
+	//	this.visitantes = new HashSet<>();
+	//	this.delfines = new ArrayList<>();
 	
+
 
 	public Boolean comprarEntradaBase(Visitante visitante) {
 		if (visitante.getDinero() >= this.precioEntradaBase) {
@@ -59,7 +86,30 @@ public class Zoologico implements Acuario {
 
 	}
 
+	public Boolean removerAnimal(Animal animal) {
+		return this.animales.remove(animal);
+	}
+
+	public void comprarAlimento(Visitante visitante) {
+	}
 	@Override
+
+
+	public Boolean agregarVisitaGuiada(VisitaGuiada visita) {
+		return this.visitasGuiadas.add(visita);
+		
+	}
+
+	public VisitaGuiada buscarVisitaGuiada(Integer id) {
+		for (VisitaGuiada visita : visitasGuiadas) {
+			if(visita.getId().equals(id)) {
+				return visita;
+			}
+		}
+		return null;
+	}
+	
+		@Override
 	public Boolean visitarAcuario(Visitante visitante) {
 		if (visitante.getTipoEntrada().equals(TipoDeEntrada.ENTRADA_PREMIUM)) {
 			return true;
@@ -77,6 +127,7 @@ public class Zoologico implements Acuario {
 			}
 			return true;
 		}
+
 	}
 
 	public Boolean agregarJaula(Jaula jaula) {
@@ -125,7 +176,7 @@ public class Zoologico implements Acuario {
 		return false;
 	}
 
-	public Set<Animal> buscarAnimalesDeUnaJaula(int numeroJaula) {
+	public Set<Animal> buscarAnimalesDeUnaJaula (int numeroJaula) {
 		for (CuidadorJaula cuidadorJaula : cuidadoresJaulas) {
 			if (cuidadorJaula.getJaula().getNumero() == numeroJaula) {
 				return cuidadorJaula.getAnimales();
