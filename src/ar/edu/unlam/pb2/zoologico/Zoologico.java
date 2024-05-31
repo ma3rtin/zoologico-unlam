@@ -35,27 +35,9 @@ public class Zoologico implements Acuario {
 		this.delfines = new ArrayList<>();
 	}
 
-	public Boolean agregarCuidador(Persona cuidador) {
-		return this.cuidadores.add(cuidador);
-	}
 
-	public Boolean agregarAnimal(Animal animal) {
-		return this.animales.add(animal);
 
-	}
-
-	public Animal buscarAnimal(Integer id) {
-		for (Animal animal : animales) {
-			if (animal.getId().equals(id)) {
-				return animal;
-			}
-		}
-		return null;
-
-		this.visitantes = new TreeSet<>();
-		this.cuidadoresJaulas = new HashSet<>();
-
-	}
+	
 
 	public Boolean comprarEntradaBase(Visitante visitante) {
 		if (visitante.getDinero() >= this.precioEntradaBase) {
