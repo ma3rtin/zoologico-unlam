@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Zoologico {// Implementar interface de zooligico - sacar cuidadores y animales
+public class Zoologico implements Acuario {
 
 	private LocalTime horaFinVisita;
 	private LocalTime horaInicioVisita;
@@ -17,6 +17,9 @@ public class Zoologico {// Implementar interface de zooligico - sacar cuidadores
 	private Double precioEntradaBase;
 	private Double precioEntradaPremium;
 	private Set<Visitante> visitantes;
+
+	private List<Delfin> delfines;
+
 	private Set<CuidadorJaula> cuidadoresJaulas;
 
 	public Zoologico(String nombre, LocalTime horaInicioVisita, LocalTime horaFinVisita) {
@@ -27,13 +30,19 @@ public class Zoologico {// Implementar interface de zooligico - sacar cuidadores
 //		this.animales = new HashSet<>();
 		this.precioEntradaBase = 500.0;
 		this.precioEntradaPremium = 1000.0;
-		this.visitantes = new TreeSet<>();
-		this.cuidadoresJaulas = new HashSet<>();
+
+		this.visitantes = new HashSet<>();
+		this.delfines = new ArrayList<>();
 	}
+
+
+
+	
 
 	public Boolean comprarEntradaBase(Visitante visitante) {
 		if (visitante.getDinero() >= this.precioEntradaBase) {
 			visitante.setDinero(visitante.getDinero() - this.precioEntradaBase);
+			visitante.setTipoEntrada(TipoDeEntrada.ENTRADA_BASE);
 			return this.visitantes.add(visitante);
 		}
 		return false;
@@ -43,10 +52,31 @@ public class Zoologico {// Implementar interface de zooligico - sacar cuidadores
 	public Boolean comprarEntradaPremium(Visitante visitante) {
 		if (visitante.getDinero() >= this.precioEntradaPremium) {
 			visitante.setDinero(visitante.getDinero() - this.precioEntradaPremium);
+			visitante.setTipoEntrada(TipoDeEntrada.ENTRADA_PREMIUM);
 			return this.visitantes.add(visitante);
 		}
 		return false;
 
+	}
+
+	@Override
+	public Boolean visitarAcuario(Visitante visitante) {
+		if (visitante.getTipoEntrada().equals(TipoDeEntrada.ENTRADA_PREMIUM)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean alimentarALosPeces(Visitante visitante, ArrayList<Pez> peces) {
+
+		if (visitarAcuario(visitante)) {
+			for (Pez pez : peces) {
+				pez.alimentar("Gusano");
+
+			}
+			return true;
+		}
 	}
 
 	public Boolean agregarJaula(Jaula jaula) {
@@ -60,16 +90,34 @@ public class Zoologico {// Implementar interface de zooligico - sacar cuidadores
 
 	public Boolean agregarAnimalAJaula(Animal animal, int numeroJaula) {
 		for (CuidadorJaula cuidadorJaula : cuidadoresJaulas) {
-			if(cuidadorJaula.getJaula().getNumero() == numeroJaula) {
+			if (cuidadorJaula.getJaula().getNumero() == numeroJaula) {
 				return cuidadorJaula.agregarAnimal(animal);
 			}
+
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean verEspectaculoDeDelfines(Visitante visitante) {
+		Delfin delfin = new Delfin(1, "Carlos", 'M', 5, "uuuuhhh uhhhhh");
+		Delfin delfin2 = new Delfin(2, "Ricardo", 'M', 6, "uuuuhhh uhhhhh");
+		Delfin delfin3 = new Delfin(3, "Julian", 'M', 7, "uuuuhhh uhhhhh");
+		if (visitarAcuario(visitante)) {
+			delfines.add(delfin);
+			delfines.add(delfin2);
+			delfines.add(delfin3);
+			delfin.saltar();
+			delfin2.saltar();
+			delfin3.saltar();
+			return true;
 		}
 		return false;
 	}
 
 	public Boolean asignarCuidadorAJaula(Cuidador cuidador, int numeroJaula) {
 		for (CuidadorJaula cuidadorJaula : cuidadoresJaulas) {
-			if(cuidadorJaula.getJaula().getNumero() == numeroJaula) {
+			if (cuidadorJaula.getJaula().getNumero() == numeroJaula) {
 				cuidadorJaula.asignarCuidador(cuidador);
 				return true;
 			}
@@ -79,10 +127,11 @@ public class Zoologico {// Implementar interface de zooligico - sacar cuidadores
 
 	public Set<Animal> buscarAnimalesDeUnaJaula(int numeroJaula) {
 		for (CuidadorJaula cuidadorJaula : cuidadoresJaulas) {
-			if(cuidadorJaula.getJaula().getNumero() == numeroJaula) {
+			if (cuidadorJaula.getJaula().getNumero() == numeroJaula) {
 				return cuidadorJaula.getAnimales();
 			}
-		};
+		}
+		;
 		return null;
 	}
 
@@ -117,4 +166,5 @@ public class Zoologico {// Implementar interface de zooligico - sacar cuidadores
 //		}
 //		return null;
 //	}
+
 }
