@@ -1,4 +1,4 @@
-#Proyecto Zoológico
+# Proyecto Zoológico
 
 Este proyecto de zoologico fue desarrollado como parte de un trabajo práctico para la materia de Programación Orientada a Objetos II en la Universidad Nacional de La Matanza. El mismo, simula el funcionamiento de un zoológico, permitiendo a los usuarios gestionar animales, cuidadores, jaulas, hábitats y visitantes.
 
