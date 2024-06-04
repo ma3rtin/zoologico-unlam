@@ -24,4 +24,10 @@ public class Elefante extends Animal {
                 return false;
         }
 	}
+	
+	@Override
+	public String emitirSonido() {
+		return "Trumpet";
+	}
+
 }

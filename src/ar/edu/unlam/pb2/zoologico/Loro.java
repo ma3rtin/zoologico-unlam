@@ -22,4 +22,9 @@ public class Loro extends Animal {
 		return true;
 	}
 
+	@Override
+	public String emitirSonido() {
+		return "¡Squawk!";
+	}
+
 }

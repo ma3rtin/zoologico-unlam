@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public interface Acuario {
 	Boolean visitarAcuario(Visitante visitante);
-	Boolean alimentarALosPeces(Visitante visitante,ArrayList<Pez> peces);
+	Boolean alimentarALosPeces(Visitante visitante);
 	Boolean verEspectaculoDeDelfines(Visitante visitante);
+	Boolean agregarVisitaGuiada(VisitaGuiada visitasGuiadas);
 }

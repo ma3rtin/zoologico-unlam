@@ -19,5 +19,10 @@ public class Delfin extends Animal {
 		return true;
 	}
 	
+	@Override
+	public String emitirSonido() {
+		return "Chasquillos y silbidos";
+	}
+
 
 }

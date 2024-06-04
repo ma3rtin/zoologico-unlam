@@ -4,15 +4,14 @@ import java.util.Objects;
 
 public abstract class Animal {
 	private Double peso;
-	//private Double altura;
 	private Integer edad;
 	private String nombre;
 	private Integer id;
 	private Character sexo;
 	private String alimento;
-//	private String sonido;
+	private String sonido;
 	
-	public Animal (Integer id,String nombre, Character sexo, Integer edad) {
+
 	public Animal (Integer id, String nombre, Character sexo, Integer edad, String sonido) {
 		this.id = id;
 	}
@@ -53,6 +52,16 @@ public abstract class Animal {
 		Animal other = (Animal) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	
 	
 	
 	
