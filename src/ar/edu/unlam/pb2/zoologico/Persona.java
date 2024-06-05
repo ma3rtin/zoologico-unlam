@@ -17,6 +17,7 @@ public abstract class Persona {
 	}
 
 
+	//Clase base para todas las personas en el zoológico.
 
 
 }

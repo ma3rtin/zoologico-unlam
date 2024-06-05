@@ -33,9 +33,9 @@ public class CuidadorJaula {
 	public List<Animal> obtenerAnimalesOrdenadosPorNombre() {
 		List<Animal> animalesOrdenados = this.getAnimales();
 		Collections.sort(animalesOrdenados, new AnimalesOrdenadosPorNombreDescendente());
-		return animalesOrdenados;
-
-	    
+		return animalesOrdenados;  
 	}
+	
+	//Asocia un cuidador con una jaula específica.
 
 }

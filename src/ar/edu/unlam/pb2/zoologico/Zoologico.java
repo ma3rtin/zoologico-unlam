@@ -17,7 +17,7 @@ public class Zoologico implements Acuario {
 	private Set<Visitante> visitantes;
 	private Set<VisitaGuiada> visitasGuiadas;
 	private List<Delfin> delfines;
-	private Set<CuidadorJaula> cuidadoresJaulas;
+	private List<CuidadorJaula> cuidadoresJaulas;
 	private List<Pez> peces;
 
 
@@ -28,8 +28,10 @@ public class Zoologico implements Acuario {
 		this.precioEntradaBase = 500.0;
 		this.precioEntradaPremium = 1000.0;
 		this.peces = new ArrayList<>();
-		this.visitantes = new TreeSet<>();
+		this.visitantes = new HashSet<>();
 		this.visitasGuiadas = new HashSet<>();
+		this.cuidadoresJaulas = new ArrayList<>();
+		this.delfines = new ArrayList<>();
 	}
 
 	public Boolean comprarEntradaBase(Visitante visitante) {
@@ -161,6 +163,19 @@ public class Zoologico implements Acuario {
 		return this.peces.add(pez);
 	}
 
+	//La clase Zoologico representa un zoológico que maneja visitantes, animales y 
+	//actividades específicas como visitas guiadas y espectáculos. Implementa la interfaz 
+	//Acuario, lo que indica que el zoológico tiene un acuario con funciones específicas para 
+	//visitantes y animales acuáticos.
 
-
+	
+	//Herencia: La clase Zoologico no hereda de otra clase, pero maneja objetos de varias clases que sí utilizan herencia, 
+	//como Animal, Cuidador, Visitante, etc.
+	//Polimorfismo: Implementa métodos definidos en la interfaz Acuario, permitiendo que el zoológico trate 
+	//a diferentes tipos de animales acuáticos de manera uniforme.
+	
+	//Interfaz Acuario: Define métodos que el zoológico debe implementar para manejar visitantes y animales en el acuario.
+	//Clases abstractas: Las clases como Animal son abstractas y definen métodos que deben ser implementados por las subclases.
+	
+	
 }

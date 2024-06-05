@@ -8,9 +8,8 @@ import java.util.Set;
 
 public class Jaula {
 
-	// enum habitat ?
 	private Integer numero;
-	private String tamanio;//
+	private String tamanio;
 	private List<Animal> animales;
 
 	public Jaula(Integer numero, String tamanio) {
@@ -48,4 +47,5 @@ public class Jaula {
 		return Objects.equals(numero, other.numero);
 	}
 
+	//Representa una jaula en el zoológico.
 }
