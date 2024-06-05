@@ -1,6 +1,7 @@
 package ar.edu.unlam.pb2.zoologico;
 
 public class Delfin extends Animal {
+	
 	public Delfin(Integer id, String nombre, Character sexo, Integer edad, String sonido) {
 		super(id,nombre, sexo, edad, sonido);
 		
@@ -17,6 +18,11 @@ public class Delfin extends Animal {
 	
 	public Boolean saltar() {
 		return true;
+	}
+
+	@Override
+	public String emitirSonido() {
+		return this.getSonido();
 	}
 	
 

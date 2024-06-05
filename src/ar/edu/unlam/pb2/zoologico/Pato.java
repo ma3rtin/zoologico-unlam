@@ -4,8 +4,8 @@ public class Pato extends Animal {
 
 	Double longitudPico;
 
-	public Pato(Integer id, String nombre, Character sexo, Integer edad, Double longitudPico) {
-		super(id, nombre, sexo, edad);
+	public Pato(Integer id, String nombre, Character sexo, Integer edad, String sonido, Double longitudPico) {
+		super(id, nombre, sexo, edad, sonido);
 		this.longitudPico = longitudPico;
 	}
 

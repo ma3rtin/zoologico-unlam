@@ -12,59 +12,26 @@ public class Zoologico implements Acuario {
 	private LocalTime horaFinVisita;
 	private LocalTime horaInicioVisita;
 	private String nombre;
-	private List<Persona> cuidadores;
-	private Set<Animal> animales;
 	private Double precioEntradaBase;
 	private Double precioEntradaPremium;
 	private Set<Visitante> visitantes;
-
-
 	private Set<VisitaGuiada> visitasGuiadas;
-	
-	
-
 	private List<Delfin> delfines;
-
 	private Set<CuidadorJaula> cuidadoresJaulas;
-
+	private List<Pez> peces;
 
 	public Zoologico(String nombre, LocalTime horaInicioVisita, LocalTime horaFinVisita) {
 		this.nombre = nombre;
 		this.horaInicioVisita = horaInicioVisita;
 		this.horaFinVisita = horaFinVisita;
-		this.cuidadores = new ArrayList<>();
-		this.animales = new HashSet<>();
 		this.precioEntradaBase = 500.0;
 		this.precioEntradaPremium = 1000.0;
-
-
-		this.visitantes = new TreeSet<>();
+		this.cuidadoresJaulas = new HashSet<>();
+		this.peces = new ArrayList<>();
+		this.visitantes = new HashSet<>();
 		this.visitasGuiadas = new HashSet<>();
+		this.delfines = new ArrayList<>();
 	}
-
-	 public Boolean agregarCuidador(Persona cuidador) {
-		return this.cuidadores.add(cuidador);
-	} 
-
- public Boolean agregarAnimal(Animal animal) {
-		return this.animales.add(animal);
-
-	} 
-
-	public Animal buscarAnimal(Integer id) {
-		for (Animal animal : animales) {
-			if(animal.getId().equals(id)) {
-				return animal;
-			}
-		}
-		return null;
-
-	} 
-
-	//	this.visitantes = new HashSet<>();
-	//	this.delfines = new ArrayList<>();
-	
-
 
 	public Boolean comprarEntradaBase(Visitante visitante) {
 		if (visitante.getDinero() >= this.precioEntradaBase) {
@@ -83,33 +50,23 @@ public class Zoologico implements Acuario {
 			return this.visitantes.add(visitante);
 		}
 		return false;
-
 	}
 
-	public Boolean removerAnimal(Animal animal) {
-		return this.animales.remove(animal);
-	}
-
-	public void comprarAlimento(Visitante visitante) {
-	}
 	@Override
-
-
 	public Boolean agregarVisitaGuiada(VisitaGuiada visita) {
 		return this.visitasGuiadas.add(visita);
-		
 	}
 
 	public VisitaGuiada buscarVisitaGuiada(Integer id) {
 		for (VisitaGuiada visita : visitasGuiadas) {
-			if(visita.getId().equals(id)) {
+			if (visita.getId().equals(id)) {
 				return visita;
 			}
 		}
 		return null;
 	}
-	
-		@Override
+
+	@Override
 	public Boolean visitarAcuario(Visitante visitante) {
 		if (visitante.getTipoEntrada().equals(TipoDeEntrada.ENTRADA_PREMIUM)) {
 			return true;
@@ -118,15 +75,19 @@ public class Zoologico implements Acuario {
 	}
 
 	@Override
-	public Boolean alimentarALosPeces(Visitante visitante, ArrayList<Pez> peces) {
+	public Boolean alimentarALosPeces(Visitante visitante) {
 
 		if (visitarAcuario(visitante)) {
 			for (Pez pez : peces) {
 				pez.alimentar("Gusano");
-
 			}
 			return true;
 		}
+		return false;
+	}
+
+	public Boolean agregarPeces(Pez pez) {
+		return this.peces.add(pez);
 
 	}
 
@@ -151,22 +112,16 @@ public class Zoologico implements Acuario {
 
 	@Override
 	public Boolean verEspectaculoDeDelfines(Visitante visitante) {
-		Delfin delfin = new Delfin(1, "Carlos", 'M', 5, "uuuuhhh uhhhhh");
-		Delfin delfin2 = new Delfin(2, "Ricardo", 'M', 6, "uuuuhhh uhhhhh");
-		Delfin delfin3 = new Delfin(3, "Julian", 'M', 7, "uuuuhhh uhhhhh");
 		if (visitarAcuario(visitante)) {
-			delfines.add(delfin);
-			delfines.add(delfin2);
-			delfines.add(delfin3);
-			delfin.saltar();
-			delfin2.saltar();
-			delfin3.saltar();
+			for (Delfin delfin : delfines) {
+				delfin.saltar();
+			}
 			return true;
 		}
 		return false;
 	}
 
-	public Boolean asignarCuidadorAJaula(Cuidador cuidador, int numeroJaula) {
+	public Boolean asignarCuidadorAJaula(Cuidador cuidador, Integer numeroJaula) {
 		for (CuidadorJaula cuidadorJaula : cuidadoresJaulas) {
 			if (cuidadorJaula.getJaula().getNumero() == numeroJaula) {
 				cuidadorJaula.asignarCuidador(cuidador);
@@ -176,7 +131,7 @@ public class Zoologico implements Acuario {
 		return false;
 	}
 
-	public Set<Animal> buscarAnimalesDeUnaJaula (int numeroJaula) {
+	public List<Animal> buscarAnimalesDeUnaJaula(Integer numeroJaula) {
 		for (CuidadorJaula cuidadorJaula : cuidadoresJaulas) {
 			if (cuidadorJaula.getJaula().getNumero() == numeroJaula) {
 				return cuidadorJaula.getAnimales();
@@ -186,36 +141,21 @@ public class Zoologico implements Acuario {
 		return null;
 	}
 
-//	public Boolean agregarAnimal(Animal animal) {
-//	return this.animales.add(animal);
-//
-//}
+	public List<Animal> buscarAnimalesDeUnaJaulaOrdenadosPorNombre(Integer numeroJaula) {
+		for (CuidadorJaula cuidadorJaula : cuidadoresJaulas) {
+			if (cuidadorJaula.getJaula().getNumero() == numeroJaula) {
+				return cuidadorJaula.obtenerAnimalesOrdenadosPorNombre();
+			}
+		}
+		return null;
+	}
 
-//public Animal buscarAnimal(Integer id) {
-//	for (Animal animal : animales) {
-//		if (animal.getId().equals(id)) {
-//			return animal;
-//		}
-//	}
-//	return null;
-//}	
-//	public Boolean agregarCuidadorAJaula(Jaula jaula, Cuidador cuidador) {
-//		for (Jaula j : jaulas) {
-//			if (j.equals(jaula)) {
-//				CuidadorAnimal cuidadorAnimal = new CuidadorAnimal(cuidador, null);
-//				return j.agregarCuidador(cuidadorAnimal);
-//			}
-//		}
-//		return false;
-//	}
-//
-//	public Boolean agregarCuidadorAnimalAJaula(Jaula jaula, Cuidador cuidador, Animal animal) {
-//		for (Jaula j : jaulas) {
-//			if(j.equals(jaula)) {
-//				return j.agregarCuidadorAnimal(cuidador, animal);
-//			}
-//		}
-//		return null;
-//	}
+	public boolean agregarPez(Pez pez) {
+		return this.peces.add(pez);
+	}
+
+	public boolean agregarDelfin(Delfin delfin) {
+		return this.delfines.add(delfin);
+	}
 
 }

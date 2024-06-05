@@ -14,6 +14,11 @@ public class Pez extends Animal {
 		}
 		return true;
 	}
+
+	@Override
+	public String emitirSonido() {
+		return this.getSonido();
+	}
 	
 
 }

@@ -4,8 +4,8 @@ public class Pinguino extends Animal {
 	
 	String plumaje;
 
-	public Pinguino(Integer id, String nombre, Character sexo, Integer edad, String plumaje) {
-		super(id, nombre, sexo, edad);
+	public Pinguino(Integer id, String nombre, Character sexo, Integer edad, String sonido, String plumaje) {
+		super(id, nombre, sexo, edad, sonido);
 		
 		this.plumaje = plumaje;
 	}
