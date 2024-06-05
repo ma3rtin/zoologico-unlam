@@ -14,6 +14,10 @@ public abstract class Animal {
 
 	public Animal (Integer id, String nombre, Character sexo, Integer edad, String sonido) {
 		this.id = id;
+		this.nombre = nombre;
+		this.sexo = sexo;
+		this.edad = edad;
+		this.sonido = sonido;
 	}
 	
 	public abstract String emitirSonido();
@@ -62,7 +66,7 @@ public abstract class Animal {
 	}
 
 	
-	
+	//Clase base para todos los animales del zoológico, define los atributos y métodos comunes.
 	
 	
 }

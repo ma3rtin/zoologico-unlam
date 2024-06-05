@@ -1,11 +1,11 @@
 package ar.edu.unlam.pb2.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import ar.edu.unlam.pb2.zoologico.Animal;
@@ -36,8 +36,9 @@ public class ZoologicoTest {
 	public void init() {
 		this.zoologico = new Zoologico(nombre, horaInicioVisita, horaFinVisita);
 	}
+	
 
-
+	@Test
 	public void dadoQueExisteUnZoologicoSePuedenAgregarJaulas() {
 		Integer numero = 1;
 		Character area = 'A';
@@ -51,8 +52,7 @@ public class ZoologicoTest {
 
 	}
 
-	
-	
+	@Test
 	public void dadoQueExisteUnaJualaEnElZooSeLePuedeAgregarUnAnimal() {
 		Animal leon = this.crearLeon(1, "Juan", 'F', 5, "ruar", "rubia");
 		Jaula jaula = this.crearJaula(1, 'A', "Chico");
@@ -65,7 +65,7 @@ public class ZoologicoTest {
 	}
 
 	
-	
+	@Test
 	public void dadoQueExisteUnaJaulaEnElZooSeLePuedeAsignarUnCuidador() {
 		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10, 10.000);
 		Jaula jaula = this.crearJaula(1, 'A', "Chico");
@@ -143,7 +143,6 @@ public class ZoologicoTest {
 		assertEquals("Ernesto", animalesDeLaJaulaOrdenados.get(1).getNombre());
 		assertEquals("Maria", animalesDeLaJaulaOrdenados.get(2).getNombre());
 		assertEquals("Pepe", animalesDeLaJaulaOrdenados.get(3).getNombre());
-
 	}
 	
 	@Test
@@ -310,4 +309,6 @@ public class ZoologicoTest {
 		return new Cuidador(nombre, apellido, edad, dni, telefono, antiguedad, sueldo);
 
 	}	
+	
+	
 }

@@ -15,4 +15,5 @@ public class Cuidador extends Persona {
 		return animalBuscado.alimentar(alimento);
 	}
 
+	//Representa a los cuidadores del zoológico.
 }

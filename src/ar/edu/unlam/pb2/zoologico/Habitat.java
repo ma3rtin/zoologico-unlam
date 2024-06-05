@@ -38,4 +38,5 @@ public class Habitat {
         return animales.remove(animal);
     }
 
+    //Representa un hábitat en el zoológico.
 }
