@@ -1,5 +1,7 @@
 package ar.edu.unlam.pb2.zoologico;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class CuidadorJaula {
@@ -24,8 +26,16 @@ public class CuidadorJaula {
 		this.cuidador = cuidador;
 	}
 
-	public Set<Animal> getAnimales() {
+	public List<Animal> getAnimales() {
 		return this.jaula.getAnimales();
+	}
+
+	public List<Animal> obtenerAnimalesOrdenadosPorNombre() {
+		List<Animal> animalesOrdenados = this.getAnimales();
+		Collections.sort(animalesOrdenados, new AnimalesOrdenadosPorNombreDescendente());
+		return animalesOrdenados;
+
+	    
 	}
 
 }

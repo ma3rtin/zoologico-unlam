@@ -1,6 +1,8 @@
 package ar.edu.unlam.pb2.zoologico;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,19 +11,19 @@ public class Jaula {
 	// enum habitat ?
 	private Integer numero;
 	private String tamanio;//
-	private Set<Animal> animales;
+	private List<Animal> animales;
 
 	public Jaula(Integer numero, String tamanio) {
 		this.numero = numero;
 		this.tamanio = tamanio;
-		this.animales = new HashSet<>();
+		this.animales = new ArrayList<>();
 	}
 
 	public Boolean agregarAnimal(Animal animal) {
 		return this.animales.add(animal);
 	}
 
-	public Set<Animal> getAnimales() {
+	public List<Animal> getAnimales() {
 		return this.animales;
 	}
 
