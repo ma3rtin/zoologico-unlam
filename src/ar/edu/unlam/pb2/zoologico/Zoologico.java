@@ -29,6 +29,8 @@ public class Zoologico implements Acuario {
 		this.cuidadoresJaulas = new HashSet<>();
 		this.peces = new ArrayList<>();
 		this.visitantes = new HashSet<>();
+		this.peces = new ArrayList<>();
+		this.visitantes = new TreeSet<>();
 		this.visitasGuiadas = new HashSet<>();
 		this.delfines = new ArrayList<>();
 	}
@@ -76,7 +78,6 @@ public class Zoologico implements Acuario {
 
 	@Override
 	public Boolean alimentarALosPeces(Visitante visitante) {
-
 		if (visitarAcuario(visitante)) {
 			for (Pez pez : peces) {
 				pez.alimentar("Gusano");
@@ -88,7 +89,6 @@ public class Zoologico implements Acuario {
 
 	public Boolean agregarPeces(Pez pez) {
 		return this.peces.add(pez);
-
 	}
 
 	public Boolean agregarJaula(Jaula jaula) {
@@ -100,7 +100,7 @@ public class Zoologico implements Acuario {
 		return this.cuidadoresJaulas.add(new CuidadorJaula(cuidador, jaula));
 	}
 
-	public Boolean agregarAnimalAJaula(Animal animal, int numeroJaula) {
+	public Boolean agregarAnimalAJaula(Animal animal, Integer numeroJaula) {
 		for (CuidadorJaula cuidadorJaula : cuidadoresJaulas) {
 			if (cuidadorJaula.getJaula().getNumero() == numeroJaula) {
 				return cuidadorJaula.agregarAnimal(animal);
@@ -148,6 +148,7 @@ public class Zoologico implements Acuario {
 			}
 		}
 		return null;
+
 	}
 
 	public boolean agregarPez(Pez pez) {

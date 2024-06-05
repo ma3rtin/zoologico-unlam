@@ -17,7 +17,11 @@ public class Pez extends Animal {
 
 	@Override
 	public String emitirSonido() {
+<<<<<<< HEAD
 		return this.getSonido();
+=======
+		return "Glu glu glu";
+>>>>>>> master
 	}
 	
 

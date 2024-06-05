@@ -11,6 +11,10 @@ public abstract class Animal {
 	private String alimento;
 	private String sonido;
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 	public Animal (Integer id, String nombre, Character sexo, Integer edad, String sonido) {
 		this.id = id;
 		this.nombre = nombre;
@@ -57,6 +61,7 @@ public abstract class Animal {
 	}
 
 	public String getNombre() {
+<<<<<<< HEAD
 		return this.nombre;
 	}
 
@@ -64,5 +69,17 @@ public abstract class Animal {
 		return sonido;
 	}
 
+=======
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	
+	
+	
+>>>>>>> master
 	
 }

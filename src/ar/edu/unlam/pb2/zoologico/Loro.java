@@ -24,7 +24,11 @@ public class Loro extends Animal {
 
 	@Override
 	public String emitirSonido() {
+<<<<<<< HEAD
 		return this.getSonido();
+=======
+		return "¡Squawk!";
+>>>>>>> master
 	}
 
 }

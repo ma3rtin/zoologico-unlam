@@ -2,7 +2,7 @@ package ar.edu.unlam.pb2.zoologico;
 
 public class Pato extends Animal {
 
-	Double longitudPico;
+	private Double longitudPico;
 
 	public Pato(Integer id, String nombre, Character sexo, Integer edad, String sonido, Double longitudPico) {
 		super(id, nombre, sexo, edad, sonido);
@@ -11,13 +11,15 @@ public class Pato extends Animal {
 
 	@Override
 	public String emitirSonido() {
-		return "cuac";
+		return "Cuack";
 	}
 
 	@Override
 	protected Boolean alimentar(String alimento) {
-		// TODO Auto-generated method stub
-		return null;
+		 if (!alimento.equals("Granos") && !alimento.equals("Plantas acuáticas")) {
+	            return false;
+	        }
+	        return true;
 	}
 
 }

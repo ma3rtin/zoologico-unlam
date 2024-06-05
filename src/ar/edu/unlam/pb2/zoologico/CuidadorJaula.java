@@ -33,6 +33,6 @@ public class CuidadorJaula {
 		List<Animal> animalesOrdenados = this.getAnimales();
 		Collections.sort(animalesOrdenados, new AnimalesOrdenadosPorNombreDescendente());
 		return animalesOrdenados;
-	}	
-	
+	}
+
 }

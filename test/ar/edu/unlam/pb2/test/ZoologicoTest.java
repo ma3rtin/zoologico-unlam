@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import ar.edu.unlam.pb2.zoologico.Animal;
@@ -58,7 +61,7 @@ public class ZoologicoTest {
 	}
 
 	public void dadoQueExisteUnaJaulaEnElZooSeLePuedeAsignarUnCuidador() {
-		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10, 2000D);
+		Cuidador cuidador = this.crearCuidador("Juan", "Perez", 34, 1233413, 111222233, 10, 10.000);
 		Jaula jaula = this.crearJaula(1, 'A', "Chico");
 		Integer numeroJaula = 1;
 
@@ -106,7 +109,6 @@ public class ZoologicoTest {
 		this.zoologico.agregarAnimalAJaula(leon3, 2);
 
 		List<Animal> animalesDeLaJaula = this.zoologico.buscarAnimalesDeUnaJaula(2);
-
 		assertEquals(3, animalesDeLaJaula.size());
 	}
 
@@ -120,7 +122,6 @@ public class ZoologicoTest {
 		Animal animal2 = this.crearElefante(2, "Ernesto", 'M', 12, "zuuu", 24.5);
 		Animal animal3 = this.crearLoro(3, "Maria", 'F', 5, "caa", "Verde", true);
 		Animal animal4 = this.crearElefante(4, "Alma", 'F', 12, "zuuu", 24.5);
-
 		this.zoologico.agregarAnimalAJaula(animal1, 1);
 		this.zoologico.agregarAnimalAJaula(animal2, 1);
 		this.zoologico.agregarAnimalAJaula(animal3, 1);
@@ -140,9 +141,9 @@ public class ZoologicoTest {
 		Visitante visitante = this.crearVisitante("Marta", "Dulce", 40, 22415007, 1185447852, 1000.0);
 		Visitante visitante2 = this.crearVisitante("Pedro", "Gonzalez", 25, 45295114, 1163238456, 2000.0);
 
-		Boolean seComproEntradaBase = this.zoologico.comprarEntradaBase(visitante);
+		this.zoologico.comprarEntradaBase(visitante);
 
-		Boolean seComproEntradaPremium = this.zoologico.comprarEntradaPremium(visitante2);
+		this.zoologico.comprarEntradaPremium(visitante2);
 
 		Double valorEsperado = visitante.getDinero();
 
@@ -164,8 +165,7 @@ public class ZoologicoTest {
 	@Test
 	public void queSePuedaAgregarAnimalesAUnHabitat() {
 		Habitat habitatPinguinos = new Habitat("Antártida", 3);
-		Animal pinguino = this.crearPinguino(1, "Felipe", 'M', 2, "honk", "corto");
-
+		Animal pinguino = this.crearPinguino(1, "Felipe", 'M', 2, "kiu kiu", "corto");
 		Boolean seAgrego = habitatPinguinos.agregarAnimal(pinguino);
 		assertTrue(seAgrego);
 	}
@@ -223,7 +223,6 @@ public class ZoologicoTest {
 		this.zoologico.agregarPez(pez3);
 
 		Boolean seAlimento = this.zoologico.alimentarALosPeces(visitante);
-
 		assertTrue(seAlimento);
 	}
 
@@ -238,6 +237,9 @@ public class ZoologicoTest {
 		this.zoologico.agregarDelfin(delfin2);
 		this.zoologico.agregarDelfin(delfin3);
 
+		this.zoologico.agregarDelfin(delfin);
+		this.zoologico.agregarDelfin(delfin2);
+		this.zoologico.agregarDelfin(delfin3);
 		this.zoologico.comprarEntradaPremium(visitante);
 		this.zoologico.visitarAcuario(visitante);
 		Boolean seVio = this.zoologico.verEspectaculoDeDelfines(visitante);
@@ -247,7 +249,6 @@ public class ZoologicoTest {
 	@Test
 	public void queSePuedaAgregarVisitaGuiada() {
 		VisitaGuiada visita = new VisitaGuiada(1, "Visita a los Leones", LocalTime.of(10, 0), 60, "Juan");
-
 		this.zoologico.agregarVisitaGuiada(visita);
 
 		VisitaGuiada visitaObtenida = zoologico.buscarVisitaGuiada(1);
@@ -298,4 +299,5 @@ public class ZoologicoTest {
 		return new Cuidador(nombre, apellido, edad, dni, telefono, antiguedad, sueldo);
 
 	}
+
 }

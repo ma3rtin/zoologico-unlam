@@ -24,9 +24,18 @@ public class Elefante extends Animal {
                 return false;
         }
 	}
+<<<<<<< HEAD
 
 	@Override
 	public String emitirSonido() {
 		return this.getSonido();
 	}
+=======
+	
+	@Override
+	public String emitirSonido() {
+		return "Trumpet";
+	}
+
+>>>>>>> master
 }
